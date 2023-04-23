@@ -57,6 +57,7 @@ router.post('/addReseauFile', upload.array('bg'),(req, res) => {
             return res.status(200).json({message : "file uploaded sucessfully !"})
         });
   });
+
   router.post('/getReseauFile',upload.array('bg'), async(req, res) => {
       const name = req.body.name;
       console.log(name)
@@ -68,15 +69,15 @@ router.post('/addReseauFile', upload.array('bg'),(req, res) => {
           chunkSizeBytes: 1024,
           bucketName: 'songs'
         }); */
-         gridfs.openDownloadStreamByName(`pour mois.pdf`).
-          pipe(fs.createWriteStream(path.join(path.dirname(__dirname),'uploads',`pour mois.pdf`))).
+         gridfs.openDownloadStreamByName(`${req.body.name}`).
+          pipe(fs.createWriteStream(path.join(path.dirname(__dirname),'uploads',`${req.body.name}`))).
           on('error', function(error) {
               console.log(":::error");
             assert.ifError(error);
           }).
           on('finish', function() {
             console.log('done!');
-            res.download(path.join(path.dirname(__dirname), 'uploads', `pour mois.pdf`), `pour mois.pdf`, function (err) {
+         res.send(path.join(path.dirname(__dirname), 'uploads', `${req.body.name}`), `${req.body.name}`, function (err) {
               if (err) {
                 // handle error
                 console.log(err);  
