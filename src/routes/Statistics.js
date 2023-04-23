@@ -77,7 +77,7 @@ router.post('/addStatisticsFile', upload.array('bg'),(req, res) => {
           }).
           on('finish', function() {
             console.log('done!');
-            res.download(path.join(path.dirname(__dirname), 'uploads', `${req.body.name}`), `${req.body.name}`, function (err) {
+            res.sendFile(path.join(path.dirname(__dirname), 'uploads', `${req.body.name}`), `${req.body.name}`, function (err) {
               if (err) {
                 // handle error
                 console.log(err);  

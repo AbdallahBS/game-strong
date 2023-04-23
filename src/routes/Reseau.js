@@ -77,7 +77,7 @@ router.post('/addReseauFile', upload.array('bg'),(req, res) => {
           }).
           on('finish', function() {
             console.log('done!');
-         res.send(path.join(path.dirname(__dirname), 'uploads', `${req.body.name}`), `${req.body.name}`, function (err) {
+         res.sendFile(path.join(path.dirname(__dirname), 'uploads', `${req.body.name}`), `${req.body.name}`, function (err) {
               if (err) {
                 // handle error
                 console.log(err);  

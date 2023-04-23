@@ -23,7 +23,11 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
 .then (()=>{
     console.log('Data base connected');
 });
-app.use(cors());
+app.use(cors({
+    origin :"http://localhost:3000",
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+})); 
 app.use(express.json());
 app.use(express.static('build'))
 app.use('/public',express.static(path.join(__dirname, 'uploads')));
